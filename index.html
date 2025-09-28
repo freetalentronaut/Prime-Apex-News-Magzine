@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!--
+    Prime Apex News Magazine — Dark theme responsive website (enhanced animations)
+    - Tailwind CSS via CDN
+    - AOS for scroll animations
+    - Extra CSS animations & hover effects added across the UI
+    - Replace Unsplash images with owned assets for production
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prime Apex News Magazine — Home</title>
+  <meta name="description" content="Prime Apex News Magazine — timely, accurate and impactful news from Nigeria and the world." />
+  <meta name="author" content="Prime Apex News Magazine" />
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS animation library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#60a5fa; /* soft blue */
+      --accent:#f59e0b; /* amber */
+      --bg:#0b1220; /* deep near-black */
+      --card:#0f1724; /* card dark */
+      --muted:#94a3b8;
+    }
+
+    html,body{height:100%}
+    body{background:var(--bg);color:#e6eef8;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+
+    .logo-type{font-family:'Playfair Display', serif; letter-spacing:0.2px}
+
+    /* hero overlay gradient for depth */
+    .hero-overlay{background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.75));}
+
+    /* floating WhatsApp button */
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:60;background:#25D366;border-radius:9999px;padding:12px;box-shadow:0 10px 30px rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;transition:transform .18s ease}
+    .whatsapp-float:hover{transform:translateY(-6px) scale(1.06)}
+
+    /* subtle underline hover animation */
+    .underline-anim{position:relative}
+    .underline-anim::after{content:'';position:absolute;left:0;right:auto;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .28s ease}
+    .underline-anim:hover::after{width:100%}
+
+    /* cards */
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.03); }
+
+    /* image hover */
+    .img-hover { transition: transform .6s cubic-bezier(.2,.8,.2,1), filter .4s, box-shadow .4s; will-change:transform; }
+    .img-hover:hover{ transform: scale(1.04) rotate(-0.2deg); filter:brightness(.9) saturate(1.06); box-shadow: 0 20px 50px rgba(2,6,23,0.6);} 
+
+    /* card hover lift */
+    .card-hover { transition: transform .36s cubic-bezier(.2,.8,.2,1), box-shadow .36s; }
+    .card-hover:hover{ transform: translateY(-8px); box-shadow: 0 28px 60px rgba(2,6,23,0.6); }
+
+    /* buttons */
+    .btn-cta { transition: transform .18s ease, box-shadow .18s ease; }
+    .btn-cta:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(96,165,250,0.12); }
+
+    /* subtle tilt on card image container */
+    .tilt { transform-origin: center; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+    .tilt:hover{ transform: perspective(800px) rotateX(3deg) rotateY(-3deg) scale(1.02);} 
+
+    /* headline shimmer */
+    .headline-shimmer{position:relative;overflow:hidden;display:inline-block}
+    .headline-shimmer::after{content:'';position:absolute;left:-120%;top:0;width:60%;height:100%;background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.18), rgba(255,255,255,0));transform:skewX(-18deg);transition:transform .9s ease}
+    .headline-shimmer:hover::after{transform:translateX(220%)}
+
+    /* floating micro animation for icons */
+    @keyframes floaty { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+    .floaty { animation: floaty 4s ease-in-out infinite; }
+
+    /* CTA pulse */
+    @keyframes pulse-cta { 0% { box-shadow: 0 0 0 0 rgba(245,158,11,0.14);} 70%{ box-shadow: 0 0 0 14px rgba(245,158,11,0);} 100%{ box-shadow:0 0 0 0 rgba(245,158,11,0);} }
+    .pulse-cta { animation: pulse-cta 3.8s infinite; }
+
+    /* accessible focus */
+    a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(96,165,250,0.14);outline-offset:3px}
+
+    /* responsiveness tweaks */
+    @media (min-width:1024px){ .headline-lg{font-size:2.6rem} }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#home" class="flex items-center gap-3 group">
+          <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-md shadow transform transition group-hover:scale-110" aria-hidden="true">
+            <rect width="48" height="48" rx="10" fill="var(--brand)" />
+            <path d="M12 34C14 28 18 24 24 24C30 24 34 28 36 34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16 18H32" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+
+          <div class="leading-tight">
+            <div class="text-base font-bold logo-type text-white transition group-hover:tracking-wide">Prime Apex</div>
+            <div class="text-xs text-slate-400">News Magazine</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+          <a href="#news" class="underline-anim hover:text-white transition">Latest</a>
+          <a href="#categories" class="underline-anim hover:text-white transition">Sections</a>
+          <a href="#about" class="underline-anim hover:text-white transition">About</a>
+          <a href="#team" class="underline-anim hover:text-white transition">Team</a>
+          <a href="#contact" class="underline-anim hover:text-white transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="mailto:primeapexnews56@gmail.com" class="hidden sm:inline-block text-sm text-slate-300 hover:text-white transition">primeapexnews56@gmail.com</a>
+          <a href="tel:09017767955" class="hidden md:inline-block px-3 py-2 bg-gradient-to-r from-blue-700 to-indigo-700 text-white rounded-full text-sm font-semibold btn-cta">Call / WhatsApp</a>
+
+          <button id="navToggle" class="md:hidden p-2 rounded-md text-slate-300" aria-expanded="false" aria-label="Open menu">
+            <svg id="navOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <svg id="navClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="md:hidden bg-black/50 border-t border-white/5 hidden">
+      <div class="px-4 py-4 space-y-2">
+        <a href="#news" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white">Latest</a>
+        <a href="#categories" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white">Sections</a>
+        <a href="#about" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white">About</a>
+        <a href="#team" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white">Team</a>
+        <a href="#contact" class="block px-3 py-2 rounded-md text-slate-300 hover:text-white">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="home" class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="newsroom" class="w-full h-full object-cover brightness-40" />
+        <div class="absolute inset-0 hero-overlay"></div>
+      </div>
+
+      <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div data-aos="fade-up" data-aos-delay="120">
+            <p class="inline-block text-sm text-amber-400 font-semibold">PRIME APEX</p>
+            <h1 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight headline-lg headline-shimmer"> <span class="headline-shimmer">Timely, accurate & impactful journalism — from Lagos to the world</span></h1>
+            <p class="mt-4 text-slate-300 max-w-xl">Prime Apex News Magazine is a collaboration between First August Solutions Limited and Olu Angel Ventures. Founded in October 2021, our mission is to deliver frontline journalism that informs, captivates and influences.</p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#news" class="inline-flex items-center gap-2 px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-semibold shadow transform transition hover:-translate-y-1 btn-cta pulse-cta">Read Latest</a>
+              <a href="#about" class="inline-flex items-center gap-2 px-4 py-3 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition">About Us</a>
+            </div>
+
+            <ul class="mt-6 flex flex-wrap gap-4 text-slate-300 text-sm">
+              <li><strong>Editor-in-Chief:</strong> Ola Jones</li>
+              <li><strong>Managing Director:</strong> Angela Daodu</li>
+              <li><strong>Founded:</strong> Nov 11, 2021</li>
+            </ul>
+          </div>
+
+          <div data-aos="fade-left" class="space-y-4">
+            <div class="card rounded-xl p-4 sm:p-6 shadow-lg card-hover">
+              <h3 class="text-lg font-semibold">Subscribe to Prime Apex</h3>
+              <p class="text-sm text-slate-300 mt-2">Get the print edition and monthly highlights delivered. Exclusive interviews in Prime Apex Glitz.</p>
+              <form class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onsubmit="event.preventDefault(); alert('Thanks for subscribing — demo only.');">
+                <input type="email" placeholder="your@email.com" required class="col-span-1 sm:col-span-2 px-3 py-2 rounded-md border border-white/10 bg-transparent text-slate-200 focus:ring-2 focus:ring-amber-300" />
+                <button class="col-span-1 sm:col-span-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-4 py-2 rounded-md font-semibold transition btn-cta">Subscribe</button>
+              </form>
+            </div>
+
+            <div class="card rounded-xl p-4 sm:p-6 shadow tilt">
+              <h4 class="text-sm font-semibold text-slate-200">Top Story</h4>
+              <a href="#" class="block mt-3">
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="Top story" class="w-full h-44 object-cover rounded-md img-hover" />
+                <div class="mt-3">
+                  <h5 class="font-semibold text-white">Inside the latest political shift shaping the region</h5>
+                  <p class="text-sm text-slate-400 mt-1">Exclusive interview with a leading figure on the new policy direction.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute inset-x-0 bottom-0 pointer-events-none">
+        <svg viewBox="0 0 1440 80" class="w-full h-20 text-white"><path fill="#0b1220" d="M0 40 C 360 120 1080 0 1440 40 L1440 80 L0 80 Z"></path></svg>
+      </div>
+    </section>
+
+    <!-- LATEST NEWS GRID -->
+    <section id="news" class="py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Latest & Featured</h2>
+          <a href="#categories" class="text-sm text-amber-400 font-semibold">View all sections →</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <article data-aos="zoom-in" class="col-span-1 md:col-span-2 lg:col-span-2 card rounded-xl shadow overflow-hidden card-hover">
+            <a href="#" class="block">
+              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="featured" class="w-full h-64 object-cover img-hover" />
+              <div class="p-4">
+                <div class="text-xs text-amber-400 font-semibold">FEATURED</div>
+                <h3 class="mt-2 text-lg font-bold text-white">How Prime Apex covered the story that sparked national debate</h3>
+                <p class="text-sm text-slate-300 mt-2">A deep dive into reporting, sources and the reaction from the corridors of power.</p>
+                <div class="mt-3 text-xs text-slate-400">By Ola Jones · 2 hours ago</div>
+              </div>
+            </a>
+          </article>
+
+          <article data-aos="fade-up" class="card rounded-xl shadow overflow-hidden card-hover">
+            <a href="#" class="block">
+              <img src="pact.png" alt="africa" class="w-full h-40 object-cover img-hover" />
+              <div class="p-4">
+                <div class="text-xs text-indigo-300 font-semibold">Africa</div>
+                <h4 class="mt-1 font-semibold text-white">Regional leaders sign historic pact</h4>
+                <p class="mt-2 text-sm text-slate-400">What the agreement means for trade and security across the region.</p>
+              </div>
+            </a>
+          </article>
+
+          <article data-aos="fade-up" data-aos-delay="60" class="card rounded-xl shadow overflow-hidden card-hover">
+            <a href="#" class="block">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="technology" class="w-full h-40 object-cover img-hover" />
+              <div class="p-4">
+                <div class="text-xs text-green-300 font-semibold">Technology</div>
+                <h4 class="mt-1 font-semibold text-white">Startups reshaping fintech in Africa</h4>
+                <p class="mt-2 text-sm text-slate-400">Profiles of founders and the next wave of digital financial services.</p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center">
+          <a href="#" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-full font-semibold transition transform hover:-translate-y-1 btn-cta">Load more stories</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section id="categories" class="py-12 sm:py-16 bg-gradient-to-b from-transparent to-black/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Sections</h2>
+          <p class="text-slate-400 mt-2 max-w-2xl mx-auto">Featured News, Africa, International, Interviews, Politics, Technology, Business & Economy, Sports, Entertainment & Events, Lifestyle.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Repeat cards with Unsplash images -->
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=700&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="interviews" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Interviews</h4>
+              <p class="text-sm text-slate-400 mt-1">In-depth conversations with influential Nigerians and global personalities.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="politics.png" alt="politics" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Politics</h4>
+              <p class="text-sm text-slate-400 mt-1">Coverage of policy, elections, governance and the political landscape.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="business.jpg" alt="business" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Business & Economy</h4>
+              <p class="text-sm text-slate-400 mt-1">Markets, corporate news and analysis shaping the economy.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=700&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="sports" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Sports</h4>
+              <p class="text-sm text-slate-400 mt-1">Match reports, athlete profiles and major sporting events.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?q=80&w=700&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="entertainment" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Entertainment & Events</h4>
+              <p class="text-sm text-slate-400 mt-1">Culture, red carpets, film and music coverage from across Africa.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=700&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="technology" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Technology</h4>
+              <p class="text-sm text-slate-400 mt-1">Startups, innovation and the digital trends transforming the continent.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="lifestyle.webp" alt="lifestyle" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">Lifestyle</h4>
+              <p class="text-sm text-slate-400 mt-1">Features on fashion, travel, food and living well.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group block card rounded-xl p-4 shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="international.jpg" alt="international" class="w-full h-40 object-cover rounded-md img-hover" />
+            <div class="mt-3">
+              <h4 class="font-semibold text-white">International</h4>
+              <p class="text-sm text-slate-400 mt-1">Global stories that matter — curated for our audience in Africa and beyond.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-12 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">About Prime Apex News Magazine</h2>
+        <p class="mt-4 text-slate-300">Prime Apex News Magazine, a collaboration between First August Solutions Limited and Olu Angel Ventures, was founded in October 2021 by media practitioners Ola Jones (Editor-in-Chief) and Angela Daodu (Managing Director). Our inaugural issue was published on November 11, 2021.</p>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+            <h4 class="font-semibold text-white">Mission</h4>
+            <p class="text-sm text-slate-300 mt-2">To deliver timely, accurate, and impactful news that captivates and informs our audience while setting the pace for frontline journalism in Nigeria and beyond.</p>
+          </div>
+
+          <div class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+            <h4 class="font-semibold text-white">Vision</h4>
+            <p class="text-sm text-slate-300 mt-2">To position Prime Apex as a leading and respected news medium globally, known for journalistic excellence and captivating storytelling.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 text-left bg-black/40 p-4 rounded-lg card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+          <h5 class="font-semibold text-white">Our Story</h5>
+          <p class="text-sm text-slate-300 mt-2">Initially launched as a monthly news magazine circulated nationwide through subscriptions, Prime Apex expanded two years later with the launch of Prime Apex Glitz — an event & lifestyle magazine featuring influential Nigerians of taste. Our editorial team is well-trained and committed to versatile, accurate reporting that resonates globally.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" class="py-12 sm:py-16 bg-black/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Meet the Team</h2>
+          <p class="text-slate-300 mt-2 max-w-2xl mx-auto">A team of professional journalists, editors and content creators powering Prime Apex.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div data-aos="fade-up" class="bg-black/40 rounded-xl p-4 text-center card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="Ola Jones" class="mx-auto h-36 w-36 object-cover rounded-full shadow-sm img-hover" />
+            <h4 class="mt-3 font-semibold text-white">Ola Jones</h4>
+            <p class="text-sm text-slate-400">Editor-in-Chief</p>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="60" class="bg-black/40 rounded-xl p-4 text-center card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1545996124-1b45f9b49b62?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="Angela Daodu" class="mx-auto h-36 w-36 object-cover rounded-full shadow-sm img-hover" />
+            <h4 class="mt-3 font-semibold text-white">Angela Daodu</h4>
+            <p class="text-sm text-slate-400">Managing Director</p>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="120" class="bg-black/40 rounded-xl p-4 text-center card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="Senior Editor" class="mx-auto h-36 w-36 object-cover rounded-full shadow-sm img-hover" />
+            <h4 class="mt-3 font-semibold text-white">Senior Editor</h4>
+            <p class="text-sm text-slate-400">News Desk</p>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="180" class="bg-black/40 rounded-xl p-4 text-center card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+            <img src="https://images.unsplash.com/photo-1544006659-f0f0f3a1c6c8?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef" alt="Photo Editor" class="mx-auto h-36 w-36 object-cover rounded-full shadow-sm img-hover" />
+            <h4 class="mt-3 font-semibold text-white">Photo Editor</h4>
+            <p class="text-sm text-slate-400">Visuals & Multimedia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS ARCHIVE -->
+    <section id="archive" class="py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">News Archive</h2>
+          <div class="text-sm text-slate-400">Curated selection</div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="space-y-4">
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Policy shifts and economic forecasts for the year</h4>
+              <p class="text-sm text-slate-300 mt-2">An analysis of fiscal policy and market response.</p>
+              <div class="mt-3 text-xs text-slate-400">Business & Economy · 1 day ago</div>
+            </article>
+
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Exclusive: Interview with a leading cultural influencer</h4>
+              <p class="text-sm text-slate-300 mt-2">A candid conversation about creativity and impact.</p>
+              <div class="mt-3 text-xs text-slate-400">Interviews · 3 days ago</div>
+            </article>
+          </div>
+
+          <div class="space-y-4">
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Technology roundup: startups to watch</h4>
+              <p class="text-sm text-slate-300 mt-2">Seed-stage companies building solutions for local problems.</p>
+              <div class="mt-3 text-xs text-slate-400">Technology · 5 days ago</div>
+            </article>
+
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Sports: the rise of new academies</h4>
+              <p class="text-sm text-slate-300 mt-2">Talent development and community programmes changing the game.</p>
+              <div class="mt-3 text-xs text-slate-400">Sports · 1 week ago</div>
+            </article>
+          </div>
+
+          <div class="space-y-4">
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Lifestyle: travel highlights across West Africa</h4>
+              <p class="text-sm text-slate-300 mt-2">Local experiences and travel guides for discerning readers.</p>
+              <div class="mt-3 text-xs text-slate-400">Lifestyle · 2 weeks ago</div>
+            </article>
+
+            <article class="bg-black/40 p-4 rounded-lg card hover:shadow-2xl transition transform hover:-translate-y-1">
+              <h4 class="font-semibold text-white">Entertainment: award season preview</h4>
+              <p class="text-sm text-slate-300 mt-2">Who to watch and expected highlights for the season.</p>
+              <div class="mt-3 text-xs text-slate-400">Entertainment · 3 weeks ago</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-12 sm:py-16 bg-gradient-to-b from-transparent to-black/20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Get in touch</h2>
+            <p class="text-slate-300 mt-2">For editorial enquiries, partnerships, advertising or subscriptions, reach us through the details below.</p>
+
+            <div class="mt-4 bg-black/40 rounded-lg p-4 card shadow hover:shadow-2xl transition transform hover:-translate-y-1">
+              <p class="text-sm text-slate-300"><strong>Phone / WhatsApp:</strong></p>
+              <ul class="text-sm text-slate-300 mt-2 space-y-1">
+                <li>09017767955</li>
+                <li>08023416829</li>
+                <li>09044438384</li>
+              </ul>
+
+              <p class="text-sm text-slate-300 mt-3"><strong>Email:</strong></p>
+              <p class="text-sm text-slate-300">primeapexnews56@gmail.com</p>
+
+              <p class="text-sm text-slate-300 mt-3"><strong>Location:</strong></p>
+              <p class="text-sm text-slate-300">Lagos, Nigeria</p>
+
+              <div class="mt-4">
+                <a href="https://wa.me/2349017767955" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-full hover:scale-105 transition">Message on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold text-white">Contact form</h3>
+            <form onsubmit="event.preventDefault(); alert('Thanks! Your message was sent. (Demo)');" class="mt-4 bg-black/40 p-4 rounded-lg card shadow space-y-3">
+              <input type="text" placeholder="Full name" required class="w-full px-3 py-2 rounded-md border border-white/10 bg-transparent text-slate-200" />
+              <input type="email" placeholder="Email" required class="w-full px-3 py-2 rounded-md border border-white/10 bg-transparent text-slate-200" />
+              <input type="tel" placeholder="Phone (optional)" class="w-full px-3 py-2 rounded-md border border-white/10 bg-transparent text-slate-200" />
+              <textarea placeholder="Your message" rows="4" class="w-full px-3 py-2 rounded-md border border-white/10 bg-transparent text-slate-200"></textarea>
+              <div class="flex items-center justify-between">
+                <button class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-md font-semibold transition btn-cta">Send message</button>
+                <p class="text-xs text-slate-400">We respect your privacy — demo form.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-t from-black/30 to-transparent text-slate-300 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <div class="flex items-center gap-3">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-md" aria-hidden="true">
+                <rect width="48" height="48" rx="10" fill="#ffffff" />
+                <path d="M12 34C14 28 18 24 24 24C30 24 34 28 36 34" stroke="#0b3d91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M16 18H32" stroke="#0b3d91" stroke-width="2" stroke-linecap="round" />
+              </svg>
+
+              <div>
+                <div class="text-white font-bold logo-type">Prime Apex</div>
+                <div class="text-xs text-slate-400">News Magazine</div>
+              </div>
+            </div>
+
+            <p class="text-sm text-slate-400 mt-4 max-w-xs">Delivering high-quality journalism and curated insights. Subscribe to receive the latest issue and exclusive content.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-white mb-3">Quick Links</h4>
+            <ul class="text-sm text-slate-400 space-y-2">
+              <li><a href="#news" class="hover:text-white">Latest</a></li>
+              <li><a href="#categories" class="hover:text-white">Sections</a></li>
+              <li><a href="#about" class="hover:text-white">About</a></li>
+              <li><a href="#team" class="hover:text-white">Team</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-white mb-3">Contact</h4>
+            <p class="text-sm text-slate-400">Email: <a href="mailto:primeapexnews56@gmail.com" class="text-amber-400">primeapexnews56@gmail.com</a></p>
+            <p class="text-sm text-slate-400 mt-1">Phone: 09017767955 / 08023416829 / 09044438384</p>
+            <p class="text-sm text-slate-400 mt-2">Location: Lagos, Nigeria</p>
+            <div class="mt-4 flex items-center gap-2">
+              <a href="#" class="text-slate-400 hover:text-white text-sm">Privacy</a>
+              <a href="#" class="text-slate-400 hover:text-white text-sm">Terms</a>
+            </div>
+          </div>
+        </div>
+
+       <div class="mt-8 border-t border-white/5 pt-6 text-sm text-slate-500 flex flex-col md:flex-row items-center justify-between gap-4">
+  <div>&copy; <span id="year"></span> Prime Apex News Magazine — All rights reserved.</div>
+  <div>
+    Designed by
+    <a href="https://www.talentronaut.in"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition underline"
+       aria-label="Talentronaut Technologies (opens in a new tab)">
+      Talentronaut Technologies
+      <!-- small external-link icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <path d="M15 3h6v6" />
+        <path d="M10 14L21 3" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/2349017767955" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Message Prime Apex on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.478A11.94 11.94 0 0012 0C5.373 0 .001 5.373.001 12a11.91 11.91 0 001.62 6.01L0 24l6.11-1.59A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12 0-3.2-1.225-6.14-3.48-8.522zM12 22.1c-1.46 0-2.892-.38-4.16-1.1l-.3-.16-3.63.96.98-3.55-.19-.32A8.09 8.09 0 013.9 12c0-4.5 3.6-8.1 8.1-8.1 4.48 0 8.1 3.6 8.1 8.1 0 4.5-3.6 8.1-8.1 8.1z"/></svg>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // AOS init
+    AOS.init({duration:800, once:true, offset:80, easing:'ease-in-out'});
+
+    // mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const navOpen = document.getElementById('navOpen');
+    const navClose = document.getElementById('navClose');
+    if(navToggle){
+      navToggle.addEventListener('click', ()=>{
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', (!expanded).toString());
+        mobileNav.classList.toggle('hidden');
+        navOpen.classList.toggle('hidden');
+        navClose.classList.toggle('hidden');
+      });
+    }
+
+    // lazy loading images where supported + subtle stagger for AOS
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('img').forEach(img=>{ if(!img.loading) img.loading='lazy'; });
+      // add small AOS delays to visible cards to create a pleasant stagger effect
+      document.querySelectorAll('[data-aos]').forEach((el, idx)=>{
+        if(!el.getAttribute('data-aos-delay')) el.setAttribute('data-aos-delay', (idx%6)*60);
+      });
+    });
+
+    // small keyboard accessibility: close mobile nav on escape
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && mobileNav && !mobileNav.classList.contains('hidden')){
+        mobileNav.classList.add('hidden');
+        navOpen.classList.remove('hidden'); navClose.classList.add('hidden'); navToggle.setAttribute('aria-expanded','false');
+      }
+    });
+  </script>
+
+</body>
+</html>
